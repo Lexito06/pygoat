@@ -52,16 +52,16 @@ jobs:
        # echo ${{ secrets.REPO_PWD }} | docker login -u ${{ secrets.REPO_USER }} --password-stdin
        # docker scout quickview
        # docker scout cves
-      
-   - name: Build Docker Image
-     run: docker build -f Dockerfile -t myapp:latest .
 
    - name: Validate Docker Image
-     run: docker inspect myapp:latest
+     run: |
+      docker inspect myapp:latest
+      docker images myapp:latest
 
    - name: Docker Scout Scan
      uses: docker/scout-action@v1.0.9
      with:
+       image: myapp:latest
        dockerhub-user: ${{ secrets.REPO_USER }}
        dockerhub-password: ${{ secrets.REPO_PWD }}
        command: quickview,cves
