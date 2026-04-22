@@ -89,3 +89,4 @@ jobs:
           python-version: 3.11
       - name: Run Semgrep
         run: semgrep scan --severity=ERROR --severity=WARNING --json --output=semgrep.json || true
+        
